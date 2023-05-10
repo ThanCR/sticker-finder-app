@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <title>Sticker Finder App</title>
+</head>
+
+<body>
+    <header class="header-container">
+        <h1 class="header-title">
+            Sticker Finder Ap<span class="flashing-letter">p</span>
+            <i class="fa-regular fa-note-sticky icon"></i>
+        </h1>
+    </header>
+    <main class="main-container">
+        <div class="search-container">
+            <input type="text" spellcheck="false" class="search-box">
+            <button class="search-button" onclick="searchSticker()"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="results-container">
+            <ul class="results-list">
+                <!-- list items goes here -->
+            </ul>
+        </div>
+    </main>
+
+    <script src="https://kit.fontawesome.com/d76d936df2.js" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+
+</html>
