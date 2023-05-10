@@ -38,8 +38,8 @@ searchInput.addEventListener('focusout', () => {
     searchContainer.style.backgroundColor = 'var(--accent)'
 })
 
-searchInput.addEventListener('keydown', ({key}) =>{
-    if(key == 'Enter'){
+searchInput.addEventListener('keydown', ({ key }) => {
+    if (key == 'Enter') {
         searchSticker();
     }
 
@@ -63,17 +63,21 @@ stickerList = '';
 
 
 const searchSticker = () => {
+    resultsList = document.querySelector('.results-list')
+    resultsList.innerHTML = ''
     closePanel();
 
-    const apikey = 'wcjXOiCheW5TGPktU6TF6Cj8q87TcwWj';
-    const limit = 48;
-    var searchQuery = document.querySelector('.search-box').value;
-    const apiURL = `https://api.giphy.com/v1/stickers/search?api_key=${apikey}&q=${searchQuery}&limit=${limit}`;
+    setTimeout(() => {
+        const apikey = 'wcjXOiCheW5TGPktU6TF6Cj8q87TcwWj';
+        const limit = 48;
+        var searchQuery = document.querySelector('.search-box').value;
+        const apiURL = `https://api.giphy.com/v1/stickers/search?api_key=${apikey}&q=${searchQuery}&limit=${limit}`;
 
-    fetch(apiURL)
-        .then(response => response.json())
-        .then(data => buildStickerObjects(data))
-        .catch(error => console.log(error))
+        fetch(apiURL)
+            .then(response => response.json())
+            .then(data => buildStickerObjects(data))
+            .catch(error => console.log(error))
+    }, 300);
 
 
     setTimeout(() => {
@@ -85,13 +89,25 @@ const searchSticker = () => {
 const buildStickerObjects = ({ data }) => {
     stickerList = '';
     resultsList = document.querySelector('.results-list')
-    data.forEach(({images}) => {
-            stickerList += `
-            <li class="list-item"><img src="${images.original.url}" loading="lazy" width="100" height="75" frameBorder="0" class="giphy-embed"/></li> 
+    if (data.length == []) {
+        setTimeout(() => {
+            resultsList.innerHTML = `
+            <div class="results-not-found">
+                <p class="not-found-text">I couldn't find your sticker</p>
+                <i class="fa-regular fa-face-sad-tear not-found-icon"></i>
+            </div>
             `;
+
+        }, 500)
+    } else {
+        data.forEach(({ images }) => {
+            stickerList += `
+                <li class="list-item"><img src="${images.original.url}" loading="lazy" width="100" height="75" frameBorder="0" class="giphy-embed"/></li> 
+                `;
         });
-        
-    resultsList.innerHTML = stickerList;
+        resultsList.innerHTML = stickerList;
+    }
+
 }
 
 
